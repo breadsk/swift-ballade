@@ -161,6 +161,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_v15yb")
 metadata/_edit_group_ = true
 
