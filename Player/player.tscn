@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvae6hbqo3nsn"]
+[gd_scene load_steps=14 format=3 uid="uid://cvae6hbqo3nsn"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_v15yb"]
 [ext_resource type="Texture2D" uid="uid://cwcm37sfeahpk" path="res://Player/player.png" id="2_4rouy"]
@@ -160,6 +160,9 @@ _data = {
 "walkU": SubResource("Animation_oec02")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c175x"]
+size = Vector2(13, 11)
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_v15yb")
@@ -182,3 +185,9 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -4.5)
+shape = SubResource("RectangleShape2D_c175x")
