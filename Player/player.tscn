@@ -169,11 +169,23 @@ script = ExtResource("1_v15yb")
 metadata/_edit_group_ = true
 
 [node name="Player" type="Sprite2D" parent="."]
+clip_children = 2
 position = Vector2(0, -16)
 rotation = 0.000980694
 texture = ExtResource("2_4rouy")
 hframes = 6
 vframes = 10
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.625, -2)
@@ -186,8 +198,12 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0.5, -4.5)
 shape = SubResource("RectangleShape2D_c175x")
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

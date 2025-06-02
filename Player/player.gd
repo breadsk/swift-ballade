@@ -7,6 +7,7 @@ extends CharacterBody2D
 
 var speed = 50
 var lastDir = "D"
+var life = 5
 
 func _physics_process(delta: float):
 	move(delta)
@@ -36,3 +37,10 @@ func animCtrl():
 	else:
 		anims.play("idle"+lastDir)#Lo concatena
 		
+func hurt():
+	life -= 1
+	print(life)
+
+func _on_hurt_box_body_entered(body: Node2D):
+	if body.name == "Skull":
+		hurt()
