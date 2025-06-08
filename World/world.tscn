@@ -441,7 +441,7 @@ layer_2/y_sort_enabled = true
 layer_2/tile_data = PackedInt32Array(196623, 655363, 7, 458761, 196611, 9, 524301, 393219, 7, 393219, 393219, 7, 983041, 393219, 7, 917512, 196611, 5, 196619, 393219, 5, 65549, 524291, 6, 65540, 196611, 5, 917526, 196611, 5, 524316, 3, 5, 917520, 655363, 5, 131096, 3, 5, 524260, 3, 5, 196584, 3, 5, 458743, 3, 5, 1048553, 196611, 9, 1048570, 196611, 9, 1048560, 655363, 7, 393195, 655363, 7, 983014, 524291, 5, 1048566, 589827, 5, 196604, 589827, 5, 1048591, 589827, 5)
 
 [node name="Player" parent="TileMap" instance=ExtResource("2_7jgqx")]
-position = Vector2(249, 90)
+position = Vector2(278, 46)
 
 [node name="Skull" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("6_ncs0b")]
 z_index = 1

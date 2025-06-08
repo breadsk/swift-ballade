@@ -19,14 +19,10 @@ func _physics_process(delta: float):
 	move()
 	animCtrl()
 	
-func changeDirection():
-	skull.flip_h = false
+func changeDirection():	
 	var tempEnd = endPosition
-	endPosition = startPosition
-	skull.flip_h = true
+	endPosition = startPosition	
 	startPosition = tempEnd
-	
-	anims.play("walkR")
 	
 func move():
 	var moveDirection = (endPosition - position)

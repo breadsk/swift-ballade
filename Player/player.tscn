@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cvae6hbqo3nsn"]
+[gd_scene load_steps=17 format=3 uid="uid://cvae6hbqo3nsn"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_v15yb"]
 [ext_resource type="Texture2D" uid="uid://cwcm37sfeahpk" path="res://Player/player.png" id="2_4rouy"]
@@ -163,6 +163,45 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c175x"]
 size = Vector2(13, 11)
 
+[sub_resource type="Animation" id="Animation_dodbk"]
+length = 0.001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qygqa"]
+resource_name = "hurts"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.407843), Color(1, 0, 0, 0.105882), Color(1, 1, 1, 0.407843), Color(1, 0, 0, 0.105882)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_88388"]
+_data = {
+"RESET": SubResource("Animation_dodbk"),
+"hurts": SubResource("Animation_qygqa")
+}
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_v15yb")
@@ -183,11 +222,13 @@ anchor_bottom = 1.0
 offset_left = -24.0
 offset_top = -24.0
 offset_right = -24.0
-offset_bottom = -24.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.625, -2)
 shape = SubResource("RectangleShape2D_8u0vl")
 
@@ -199,11 +240,15 @@ libraries = {
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0.5, -4.5)
 shape = SubResource("RectangleShape2D_c175x")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_88388")
+}
 
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
