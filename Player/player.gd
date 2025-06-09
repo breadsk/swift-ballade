@@ -1,15 +1,16 @@
 extends CharacterBody2D
+
 @onready var sprite: Sprite2D = $Player
 @onready var effects: AnimationPlayer = $Effects
-
 @onready var anims: AnimationPlayer = $AnimationPlayer
-
+@onready var hurtTimer: Timer = $HurtTimer
 
 
 var speed = 50
 var lastDir = "D"
 var life = 5
 var knoBackPower = 400
+var isHurting = false
 
 func _physics_process(delta: float):
 	move(delta)
@@ -40,12 +41,17 @@ func animCtrl():
 		anims.play("idle"+lastDir)#Lo concatena
 		
 func hurt(area):
-	life -= 1	
+	if isHurting: return
+	life -= 1
+	isHurting = true
 	effects.play("hurts")
+	hurtTimer.start()
 	knockBack(area.get_parent().velocity)
 	print(life)
-	await effects.animation_finished
+	await hurtTimer.timeout
+	#await effects.animation_finished
 	effects.play("RESET")
+	isHurting = false
 
 func knockBack(enemyVelocity: Vector2):
 	var knockBackDir = (enemyVelocity).normalized() * knoBackPower
