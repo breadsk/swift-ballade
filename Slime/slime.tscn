@@ -142,7 +142,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1fkp"]
-size = Vector2(14, 10)
+size = Vector2(14, 12)
 
 [node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_r3o03")

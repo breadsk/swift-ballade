@@ -39,19 +39,19 @@ func animCtrl():
 	else:
 		anims.play("idle"+lastDir)#Lo concatena
 		
-func hurt():
+func hurt(area):
 	life -= 1	
 	effects.play("hurts")
-	knockBack()
+	knockBack(area.get_parent().velocity)
 	print(life)
 	await effects.animation_finished
 	effects.play("RESET")
 
-func knockBack():
-	var knockBackDir = -velocity.normalized() * knoBackPower
+func knockBack(enemyVelocity: Vector2):
+	var knockBackDir = (enemyVelocity).normalized() * knoBackPower
 	velocity = knockBackDir
 	move_and_slide()
 
 func _on_hurt_box_area_entered(area: Area2D):
 	if area.is_in_group("Enemies"):
-		hurt()
+		hurt(area)
