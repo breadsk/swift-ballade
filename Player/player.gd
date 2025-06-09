@@ -9,6 +9,7 @@ extends CharacterBody2D
 var speed = 50
 var lastDir = "D"
 var life = 5
+var knoBackPower = 400
 
 func _physics_process(delta: float):
 	move(delta)
@@ -41,10 +42,16 @@ func animCtrl():
 func hurt():
 	life -= 1	
 	effects.play("hurts")
+	knockBack()
 	print(life)
 	await effects.animation_finished
 	effects.play("RESET")
 
-func _on_hurt_box_body_entered(body: Node2D):
-	if body.name == "Skull":
+func knockBack():
+	var knockBackDir = -velocity.normalized() * knoBackPower
+	velocity = knockBackDir
+	move_and_slide()
+
+func _on_hurt_box_area_entered(area: Area2D):
+	if area.is_in_group("Enemies"):
 		hurt()

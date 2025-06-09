@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmxf701bke3sr"]
+[gd_scene load_steps=13 format=3 uid="uid://dmxf701bke3sr"]
 
 [ext_resource type="Texture2D" uid="uid://buuw8eiq6pi1n" path="res://Skull/skeleton_swordless.png" id="1_5ngyt"]
 [ext_resource type="Script" path="res://Skull/skull.gd" id="1_pd4cn"]
@@ -140,6 +140,9 @@ _data = {
 "walkU": SubResource("Animation_mxuy5")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3sxxi"]
+size = Vector2(13, 14)
+
 [node name="Skull" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_pd4cn")
@@ -159,3 +162,9 @@ shape = SubResource("RectangleShape2D_0qow5")
 libraries = {
 "": SubResource("AnimationLibrary_ht8ma")
 }
+
+[node name="HitBox" type="Area2D" parent="." groups=["Enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0.5, -6)
+shape = SubResource("RectangleShape2D_3sxxi")

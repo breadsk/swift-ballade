@@ -239,10 +239,9 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="HurtBox" type="Area2D" parent="."]
-visible = false
+[node name="HitBox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0.5, -4.5)
 shape = SubResource("RectangleShape2D_c175x")
 
@@ -251,4 +250,4 @@ libraries = {
 "": SubResource("AnimationLibrary_88388")
 }
 
-[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hurt_box_area_entered"]
