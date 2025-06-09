@@ -5,7 +5,6 @@ extends CharacterBody2D
 @onready var anims: AnimationPlayer = $AnimationPlayer
 @onready var hurtTimer: Timer = $HurtTimer
 
-
 var speed = 50
 var lastDir = "D"
 var life = 5
