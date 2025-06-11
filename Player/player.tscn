@@ -255,3 +255,4 @@ libraries = {
 one_shot = true
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]

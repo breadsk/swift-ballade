@@ -10,14 +10,19 @@ var lastDir = "D"
 var life = 5
 var knoBackPower = 400
 var isHurting = false
+var enemyCollisions = []
 
 func _physics_process(delta: float):
 	move(delta)
 	animCtrl()
-	
+	if not isHurting:
+		for enemyArea in enemyCollisions:
+			hurt(enemyArea)
+		
 func move(delta: float):
 	velocity = Input.get_vector("left","right","up","down") * speed
-	move_and_slide()
+	move_and_collide(velocity * delta)
+	#move_and_slide()
 	
 func animCtrl():
 	#La primera animación es la predefinida
@@ -40,7 +45,7 @@ func animCtrl():
 		anims.play("idle"+lastDir)#Lo concatena
 		
 func hurt(area):
-	if isHurting: return
+	#if isHurting: return
 	life -= 1
 	isHurting = true
 	effects.play("hurts")
@@ -59,4 +64,8 @@ func knockBack(enemyVelocity: Vector2):
 
 func _on_hurt_box_area_entered(area: Area2D):
 	if area.is_in_group("Enemies"):
-		hurt(area)
+		enemyCollisions.append(area)
+		#hurt()
+
+func _on_hit_box_area_exited(area: Area2D):
+	enemyCollisions.erase(area)

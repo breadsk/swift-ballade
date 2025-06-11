@@ -466,4 +466,4 @@ position = Vector2(-99, 77)
 endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="Slime"]
-position = Vector2(-1, 123)
+position = Vector2(-89, -3)

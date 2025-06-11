@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var slime: Sprite2D = $Slime
 
 @export var endPoint: Marker2D
-var speed = 70
+var speed = 60
 var startPosition
 var endPosition
 var limit = 0.5
@@ -16,7 +16,7 @@ func _ready():#Solo lo ejecuta una vez
 	print("Se esta cargando")
 	
 func _physics_process(delta: float):
-	move()
+	move(delta)
 	animCtrl()
 	
 func changeDirection():	
@@ -24,15 +24,15 @@ func changeDirection():
 	endPosition = startPosition	
 	startPosition = tempEnd
 	
-func move():
+func move(delta: float):
 	var moveDirection = (endPosition - position)
-	anims.play("walkR")
+	#anims.play("walkR")
 	
 	if moveDirection.length() < limit:
 		changeDirection()
 		
 	velocity = moveDirection.normalized() * speed
-	move_and_slide()
+	move_and_collide(velocity * delta)
 	
 func animCtrl():
 	#La primera animación es la predefinida

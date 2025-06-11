@@ -16,7 +16,7 @@ func _ready():#Solo lo ejecuta una vez
 	print("Se esta cargando")
 	
 func _physics_process(delta: float):
-	move()
+	move(delta)
 	animCtrl()
 	
 func changeDirection():	
@@ -24,7 +24,7 @@ func changeDirection():
 	endPosition = startPosition	
 	startPosition = tempEnd
 	
-func move():
+func move(delta: float):
 	var moveDirection = (endPosition - position)
 	anims.play("walkR")
 	
@@ -32,7 +32,7 @@ func move():
 		changeDirection()
 		
 	velocity = moveDirection.normalized() * speed
-	move_and_slide()
+	move_and_collide(velocity * delta)
 	
 func animCtrl():
 	#La primera animación es la predefinida
