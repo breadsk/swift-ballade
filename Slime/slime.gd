@@ -53,3 +53,8 @@ func animCtrl():
 		lastDir = "U"
 	else:
 		anims.play("idle"+lastDir)#Lo concatena
+
+
+func _on_hurt_box_area_entered(area: Area2D):
+	if area.is_in_group("Player"):
+		queue_free()
