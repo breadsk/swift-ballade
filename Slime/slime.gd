@@ -9,15 +9,19 @@ var startPosition
 var endPosition
 var limit = 0.5
 var lastDir = "R"
+var slimeLife = 2
+var isDied = false
 
-func _ready():#Solo lo ejecuta una vez
+func _ready():#Solo lo ejecuta una vez	
 	startPosition = position
-	endPosition = endPoint.global_position
-	print("Se esta cargando")
+	endPosition = endPoint.global_position	
 	
 func _physics_process(delta: float):
+	if isDied: return
 	move(delta)
 	animCtrl()
+func _process(delta: float):
+	die()
 	
 func changeDirection():	
 	var tempEnd = endPosition
@@ -54,7 +58,17 @@ func animCtrl():
 	else:
 		anims.play("idle"+lastDir)#Lo concatena
 
+func hurt():
+	slimeLife -= 1
+	
+func die():
+	if slimeLife <= 0:
+		isDied = true
+		anims.play("die")
+		await anims.animation_finished
+		queue_free()
 
 func _on_hurt_box_area_entered(area: Area2D):
 	if area.is_in_group("Player"):
-		queue_free()
+		hurt()
+		#queue_free()

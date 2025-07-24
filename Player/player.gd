@@ -13,11 +13,17 @@ var knoBackPower = 400
 var isHurting = false
 var isAttacking = false
 var enemyCollisions = []
+var isDied = false
+var has_died = false # Bandera para controlar si ya se ejecutó die
 
 func _ready():
 	$HitBox/CollisionShape2D.disabled = true
 
+func _process(delta: float):
+	die()
+
 func _physics_process(delta: float):
+	if isDied: return
 	move(delta)
 	animCtrl()
 	attack()
@@ -81,6 +87,15 @@ func hurt(area):
 	effects.play("RESET")
 	isHurting = false
 
+func die():
+	if life <= 0 and not has_died:
+		has_died = true
+		isDied = true
+		anims.play("die")
+		await anims.animation_finished
+		print("Se vuelve a ejecutar")
+		
+		
 func knockBack(enemyVelocity: Vector2):
 	var knockBackDir = (enemyVelocity).normalized() * knoBackPower
 	velocity = knockBackDir
